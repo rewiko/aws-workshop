@@ -1,8 +1,8 @@
 resource "aws_autoscaling_group" "asg" {
   name                = "workshop-asg"
-  max_size            = 5
-  min_size            = 2
-  desired_capacity    = 2
+  max_size            = 6
+  min_size            = 3
+  desired_capacity    = 3
   vpc_zone_identifier = aws_subnet.pub-subnets[*].id
   health_check_type   = "EC2"
 
