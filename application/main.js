@@ -38,7 +38,7 @@ console.log("All models were synchronized successfully.");
 // Routes
 app.get("/", function (req, res, next) {
   console.log("request on /");
-  res.status(200).json({ status: "ok", hostname: hostname });
+  res.status(200).json({ status: "ok", provided_by: hostname });
 });
 
 app.get("/users", async function (req, res, next) {
@@ -51,7 +51,7 @@ app.get("/users", async function (req, res, next) {
       .status(500)
       .json({ status: "ko", message: "Unable to truncate table user" });
   }
-  res.status(200).json({ data: users });
+  res.status(200).json({ provided_by: hostname, data: users });
 });
 
 app.get("/import-data", async function (req, res, next) {
@@ -87,7 +87,9 @@ app.get("/import-data", async function (req, res, next) {
     }
   });
 
-  res.status(200).json({ status: "ok", message: "data imported" });
+  res
+    .status(200)
+    .json({ status: "ok", message: "data imported", provided_by: hostname });
 });
 
 app.use(function (err, req, res, next) {
