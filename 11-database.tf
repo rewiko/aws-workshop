@@ -5,7 +5,7 @@ resource "random_password" "master" {
 }
 
 resource "aws_secretsmanager_secret" "password" {
-  name = "workshop-db-password"
+  name = "workshop-v1-db-password"
 }
 
 resource "aws_secretsmanager_secret_version" "password" {
@@ -14,7 +14,7 @@ resource "aws_secretsmanager_secret_version" "password" {
 }
 
 resource "aws_secretsmanager_secret" "db_hostname" {
-  name = "workshop-db-hostname"
+  name = "workshop-v1-db-hostname"
 }
 
 resource "aws_secretsmanager_secret_version" "db_hostname" {

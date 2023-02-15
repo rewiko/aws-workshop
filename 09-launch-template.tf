@@ -32,6 +32,10 @@ resource "aws_launch_template" "template" {
       Name = "workshop-ec2-template"
     }
   }
+
+  depends_on = [
+    aws_db_instance.db
+  ]
 }
 
 resource "tls_private_key" "algorithm" {

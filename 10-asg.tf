@@ -22,6 +22,10 @@ resource "aws_autoscaling_group" "asg" {
     ignore_changes = [load_balancers, target_group_arns]
   }
 
+  depends_on = [
+    aws_db_instance.db
+  ]
+
 }
 
 resource "aws_autoscaling_attachment" "asg-attach" {
