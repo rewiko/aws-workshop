@@ -32,7 +32,7 @@ const User = sequelize.define(
   {}
 );
 
-sequelize.sync({ force: true });
+sequelize.sync({ alter: true });
 console.log("All models were synchronized successfully.");
 
 // Routes
