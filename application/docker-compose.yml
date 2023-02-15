@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+    environment:
+      - ENV=dev
+      - DBPassword=mypassword
+      - DBHostname=mysql
+    ports:
+      - '8080:8080'
+    depends_on:
+      mysql:
+        condition: service_healthy
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'workshopdb'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'dbadmin'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'mypassword'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'mypassword'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 1s
+      retries: 3
+
+
