@@ -1,9 +1,9 @@
 #!/bin/bash
 sudo apt update
-sudo apt install nodejs npm jq awscli -y
-sudo apt install nginx -y
-sudo systemctl enable nginx
-sudo systemctl start nginx
+sudo apt install nodejs npm jq awscli git -y
+# sudo apt install nginx -y
+# sudo systemctl enable nginx
+# sudo systemctl start nginx
 echo "Deploy new version 1"
 # # sudo systemctl status nginx
 # sudo mkdir -p /var/www/tutorial
@@ -14,7 +14,8 @@ export DBPassword=$(aws secretsmanager get-secret-value --region ${region} --sec
 export DBHostname=$(aws secretsmanager get-secret-value --region ${region} --secret-id workshop-db-hostname --query SecretString --output text)
 export hostname=$(hostname -f)
 
-git clone https://github.com/...
+git clone https://github.com/rewiko/aws-workshop.git
+cd aws-workshop/application
 npm install
-npm run
-create system service to start nodejs
+node main.js
+# create system service to start nodejs
