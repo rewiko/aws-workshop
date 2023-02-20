@@ -34,4 +34,7 @@ terraform apply -auto-approve
 curl http://workshop-app-lb-1024672469.eu-west-1.elb.amazonaws.com/ | jq . # the hostname in the payload will change depending on the EC2 receiving the request
 curl http://workshop-app-lb-1024672469.eu-west-1.elb.amazonaws.com/import-data | jq .
 curl http://workshop-app-lb-1024672469.eu-west-1.elb.amazonaws.com/users | jq .
+
+
+terraform destroy
 ```
