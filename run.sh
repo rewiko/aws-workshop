@@ -4,7 +4,7 @@ sudo apt install nodejs npm jq awscli git -y
 # sudo apt install nginx -y
 # sudo systemctl enable nginx
 # sudo systemctl start nginx
-echo "Deploy new version 5"
+echo "Deploy new version 6"
 # # sudo systemctl status nginx
 # sudo mkdir -p /var/www/tutorial
 # echo "<h1>HELLO from $(hostname -f)</h1>" | sudo tee -a /var/www/tutorial/index.html >/dev/null

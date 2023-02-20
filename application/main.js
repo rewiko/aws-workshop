@@ -1,6 +1,8 @@
 const http = require("http");
 const express = require("express");
 const { Sequelize, DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const app = express();
 const dbHostname = process.env.DBHostname;
@@ -49,15 +51,22 @@ app.get("/", function (req, res, next) {
 
 app.get("/users", async function (req, res, next) {
   let users;
+  let hashedPassword;
   try {
+    var password = Math.random().toString(36).slice(2, 15);
+    // cpu intensive task
+    hashedPassword = await bcrypt.hash(password, saltRounds);
+
     users = await User.findAll();
   } catch (error) {
-    console.error("Unable to truncate table user:", error);
+    console.error("Unable to get info from table user:", error);
     return res
       .status(500)
-      .json({ status: "ko", message: "Unable to truncate table user" });
+      .json({ status: "ko", message: "Unable to get info from table user" });
   }
-  res.status(200).json({ provided_by: hostname, data: users });
+  res
+    .status(200)
+    .json({ provided_by: hostname, data: users, bcrypt: hashedPassword });
 });
 
 app.get("/import-data", async function (req, res, next) {
@@ -102,6 +111,20 @@ app.use(function (err, req, res, next) {
   console.log(err);
   res.sendStatus(500);
 });
+
+async function hashPassword(user) {
+  const password = user.password;
+  const saltRounds = 10;
+
+  const hashedPassword = await new Promise((resolve, reject) => {
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+      if (err) reject(err);
+      resolve(hash);
+    });
+  });
+
+  return hashedPassword;
+}
 
 // Server
 const host = process.env.HOST || "0.0.0.0";
