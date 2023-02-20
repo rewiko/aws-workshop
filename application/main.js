@@ -49,14 +49,24 @@ app.get("/", function (req, res, next) {
   res.status(200).json({ status: "ok", provided_by: hostname });
 });
 
-app.get("/users", async function (req, res, next) {
-  let users;
+app.get("/intensive-cpu", async function (req, res, next) {
   let hashedPassword;
   try {
     var password = Math.random().toString(36).slice(2, 15);
     // cpu intensive task
     hashedPassword = await bcrypt.hash(password, saltRounds);
+  } catch (error) {
+    console.error("Unable to hash password:", error);
+    return res
+      .status(500)
+      .json({ status: "ko", message: "Unable to hash password" });
+  }
+  res.status(200).json({ provided_by: hostname, bcrypt: hashedPassword });
+});
 
+app.get("/users", async function (req, res, next) {
+  let users;
+  try {
     users = await User.findAll();
   } catch (error) {
     console.error("Unable to get info from table user:", error);
@@ -64,9 +74,7 @@ app.get("/users", async function (req, res, next) {
       .status(500)
       .json({ status: "ko", message: "Unable to get info from table user" });
   }
-  res
-    .status(200)
-    .json({ provided_by: hostname, data: users, bcrypt: hashedPassword });
+  res.status(200).json({ provided_by: hostname, data: users });
 });
 
 app.get("/import-data", async function (req, res, next) {
