@@ -120,20 +120,6 @@ app.use(function (err, req, res, next) {
   res.sendStatus(500);
 });
 
-async function hashPassword(user) {
-  const password = user.password;
-  const saltRounds = 10;
-
-  const hashedPassword = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, function (err, hash) {
-      if (err) reject(err);
-      resolve(hash);
-    });
-  });
-
-  return hashedPassword;
-}
-
 // Server
 const host = process.env.HOST || "0.0.0.0";
 const port = process.env.PORT || 8080;
