@@ -41,6 +41,6 @@ resource "aws_autoscaling_policy" "asg-policy" {
     predefined_metric_specification {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
-    target_value = 50.0
+    target_value = 10.0
   }
 }

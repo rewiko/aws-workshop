@@ -4,7 +4,7 @@
 
 ```bash
 
-export BASE_URL="http://workshop-app-lb-2113109793.eu-west-1.elb.amazonaws.com"
+export BASE_URL="http://workshop-app-lb-372977466.eu-west-1.elb.amazonaws.com"
 
 # import data into database
 curl ${BASE_URL}/import-data | jq .

@@ -7,7 +7,7 @@ const failureRate = new Rate("check_failure_rate");
 
 const BASE_URL = __ENV.BASE_URL || "http://localhost:8080";
 const RAMP_TIME = __ENV.RAMP_TIME || "10s";
-const RUN_TIME = __ENV.RUN_TIME || "10s";
+const RUN_TIME = __ENV.RUN_TIME || "30s";
 const USER_COUNT = __ENV.USER_COUNT || 30;
 const SLEEP = __ENV.SLEEP || 1;
 
@@ -34,7 +34,7 @@ export const options = {
 };
 
 // url
-const url = `${BASE_URL}/users`;
+const url = `${BASE_URL}/intensive-cpu`;
 
 export default function (data) {
   const responses = http.batch([

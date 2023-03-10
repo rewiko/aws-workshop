@@ -5,7 +5,8 @@ resource "random_password" "master" {
 }
 
 resource "aws_secretsmanager_secret" "password" {
-  name = "workshop-v8-db-password"
+  name                    = "workshop-v12-db-password"
+  recovery_window_in_days = 0 # Number of days that AWS Secrets Manager waits before it can delete the secret
 }
 
 resource "aws_secretsmanager_secret_version" "password" {
@@ -14,7 +15,8 @@ resource "aws_secretsmanager_secret_version" "password" {
 }
 
 resource "aws_secretsmanager_secret" "db_hostname" {
-  name = "workshop-v8-db-hostname"
+  name                    = "workshop-v12-db-hostname"
+  recovery_window_in_days = 0 # Number of days that AWS Secrets Manager waits before it can delete the secret
 }
 
 resource "aws_secretsmanager_secret_version" "db_hostname" {
